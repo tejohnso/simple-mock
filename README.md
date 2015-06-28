@@ -45,6 +45,8 @@ simple.mock(obj, 'example').returnWith('etc') // Stub
 simple.mock(obj, 'example').throwWith(new Error()) // Stub
 simple.mock(obj, 'example').resolveWith('etc') // Stub
 simple.mock(obj, 'example').rejectWith(new Error()) // Stub
+
+simple.mock(obj) // Fully mocked object with all functions returning true
 ```
 
 Then, to make sure all objects are back to the state the were in before your mocks:

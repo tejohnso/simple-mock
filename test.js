@@ -934,7 +934,7 @@ describe('simple', function () {
       })
     })
 
-    describe('with one argument', function () {
+    describe('with one argument that is a function', function () {
       it('returns a spy', function () {
         var called = 0
 
@@ -945,6 +945,20 @@ describe('simple', function () {
         spy()
         assert(called, 1)
         assert(spy.called)
+      })
+    })
+
+    describe('with one argument that is not a function', function () {
+      it('returns a mocked object with true return values', function () {
+        var obj = {
+          a: 'a',
+          b: function () {
+            assert(false)
+          }
+        }
+
+        simple.mock(obj)
+        assert(obj.b())
       })
     })
 

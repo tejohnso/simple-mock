@@ -26,7 +26,15 @@
     if (!arguments.length) {
       return simple.spyOrStub()
     } else if (arguments.length === 1) {
-      return simple.spyOrStub(obj)
+      if (isFunction(obj)) {
+        return simple.spyOrStub(obj)
+      } else {
+        Object.keys(obj).forEach(function (key) {
+          if (isFunction(obj[key])) {
+            return simple.mock(obj, key).returnWith(true)
+          }
+        })
+      }
     } else if (isFunction(mockValue)) {
       mockValue = simple.spyOrStub(mockValue)
     } else if (arguments.length === 2) {
